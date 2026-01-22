@@ -6,9 +6,9 @@ import { FaWindowClose } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { TiThMenu } from "react-icons/ti";
 import { PiBooksFill } from "react-icons/pi";
+import { FaArrowLeft } from "react-icons/fa";
 import { isOwnProfile } from "../utils/auth";
 import GradualBlur from "./GradualBlur";
-import { IoMdArrowRoundBack } from "react-icons/io";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 
@@ -66,7 +66,7 @@ export default function BookDetail({ bookData, userId }) {
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/users/${userId}/book/${bookId}`,
-        requestOptions
+        requestOptions,
       );
 
       if (response.ok) {
@@ -135,7 +135,7 @@ export default function BookDetail({ bookData, userId }) {
             <nav>
               <ul className="flex justify-center items-center space-x-4 md:px-3 text-xl">
                 <li onClick={goShelf}>
-                  <IoMdArrowRoundBack
+                  <FaArrowLeft
                     size={60}
                     color="white"
                     className="cursor-pointer"
@@ -201,7 +201,7 @@ export default function BookDetail({ bookData, userId }) {
               <ul className="pt-4 uppercase text-2xl text-white font-['Radley']">
                 <li>
                   <img
-                    src="/chaptr-logo-lg.png"
+                    src="/chaptr-logo-lg.webp"
                     alt="Logo in light beige"
                     className="w-[10rem] justify-center mx-auto py-5"
                   ></img>
@@ -234,7 +234,7 @@ export default function BookDetail({ bookData, userId }) {
 
               <div className="relative z-30 w-[60%] sm:w-[55%] md:w-[50%] lg:w-[40%] 2xl:w-[30%] aspect-[3/4] mb-5 sm:mb-10">
                 <img
-                  src="/book.png"
+                  src="/book.webp"
                   alt="blank book"
                   className="w-full shadow-custom-dark rounded-2xl"
                 />

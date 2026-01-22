@@ -45,7 +45,7 @@ const SpotlightCard = ({
       onMouseLeave={handleMouseLeave}
       className={`relative rounded-[50px] border border-white bg-[url('/Card.png')] overflow-hidden px-2 ${className}`}
       style={{
-        backgroundImage: "url('/Card.png')",
+        backgroundImage: "url('/Card.webp')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",

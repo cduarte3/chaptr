@@ -60,7 +60,7 @@ export default function UserProfile({ userData }) {
       ) {
         setModalIcon("/alert.png");
         setModalHeader("No Changes");
-        setModalMessage("All empty or non-changed fields.");
+        setModalMessage("All fields empty or unchanged. Please try again.");
         setIsModalLocked(false);
         handleOpen();
         return;
@@ -93,7 +93,7 @@ export default function UserProfile({ userData }) {
 
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/users/${userData.id}/update`,
-        requestOptions
+        requestOptions,
       );
       if (response.status === 200) {
         setModalIcon("/success.png");
@@ -120,6 +120,14 @@ export default function UserProfile({ userData }) {
           setModalIcon("/alert.png");
           setModalHeader("Error!");
           setModalMessage("Username must be between 3 and 20 characters.");
+          setIsModalLocked(false);
+          handleOpen();
+          return;
+        }
+        if (response.status === 401) {
+          setModalIcon("/alert.png");
+          setModalHeader("Error!");
+          setModalMessage("Email cannot be changed for a google OAuth User.");
           setIsModalLocked(false);
           handleOpen();
           return;
@@ -210,7 +218,7 @@ export default function UserProfile({ userData }) {
           className="z-50 h-12 md:h-16 fixed mx-auto left-2 md:left-10 mt-6 cursor-pointer"
         />
         <img
-          src="/chaptr-logo-sm.png"
+          src="/chaptr-logo-sm.webp"
           alt="Chaptr Logo"
           className="z-50 h-12 md:h-16 fixed mx-auto left-0 right-0 mt-6"
         />
@@ -225,7 +233,7 @@ export default function UserProfile({ userData }) {
             speed={6}
             scale={1}
             color="#565656"
-            noiseIntensity={1.5}
+            noiseIntensity={0}
             rotation={0}
           />
         </Suspense>
@@ -263,7 +271,12 @@ export default function UserProfile({ userData }) {
                   htmlFor="Email"
                   className="font-['Radley'] block text-2xl text-white"
                 >
-                  Email
+                  Email{" "}
+                  {userData.googleId && (
+                    <span className="text-sm text-gray-400">
+                      (Google OAuth)
+                    </span>
+                  )}
                 </label>
                 <div className="mt-2 shadow">
                   <input
@@ -271,7 +284,10 @@ export default function UserProfile({ userData }) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder={userData.email}
-                    className="bg-[#242626] block w-full border-0 py-4 px-4 text-white shadow-sm ring-1 ring-inset ring-white placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[rgb(36,36,38)] text-lg sm:leading-6 rounded-[15px]"
+                    disabled={userData.googleId}
+                    className={`bg-[#242626] block w-full border-0 py-4 px-4 text-white shadow-sm ring-1 ring-inset ring-white placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[rgb(36,36,38)] text-lg sm:leading-6 rounded-[15px] ${
+                      userData.googleId ? "opacity-50 cursor-not-allowed" : ""
+                    }`}
                   />
                 </div>
               </div>
