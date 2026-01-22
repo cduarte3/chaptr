@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /user/*/edit
+Disallow: /user/*/add
+
+Sitemap: https://www.chaptr.net/sitemap.xml

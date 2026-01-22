@@ -68,7 +68,7 @@ export default function Questions() {
             speed={6}
             scale={1}
             color="#565656"
-            noiseIntensity={1.5}
+            noiseIntensity={0}
             rotation={0}
           />
         </Suspense>
@@ -79,7 +79,7 @@ export default function Questions() {
           <ul className="flex justify-center items-center space-x-4 md:px-5 text-xl px-1">
             <li>
               <img
-                src="chaptr-logo-sm.png"
+                src="chaptr-logo-sm.webp"
                 className="w-[150px]"
                 alt="Chaptr Logo"
               />
@@ -120,7 +120,7 @@ export default function Questions() {
           <ul className="pt-4 uppercase text-2xl text-white font-['Radley']">
             <li>
               <img
-                src="/chaptr-logo-lg.png"
+                src="/chaptr-logo-lg.webp"
                 alt="Logo in light beige"
                 className="w-[10rem] justify-center mx-auto py-5"
               ></img>
@@ -163,7 +163,7 @@ export default function Questions() {
         <div className="pt-5 flex-col grid lg:grid-cols-2 grid-cols-1">
           <div className="lg:pt-28 pt-10 lg:w-[110%]">
             <img
-              src="desk_dash.png"
+              src="desk_dash.webp"
               className="mx-auto h-[200px] sm:h-[250px] md:h-[300px] xl:h-[350px] 2xl:h-[450px]"
               alt="Bookshelf"
             />
@@ -171,7 +171,7 @@ export default function Questions() {
 
           <div className="py-10 lg:py-5">
             <img
-              src="mobile_dash.png"
+              src="mobile_dash.webp"
               className="mx-auto w-[200px] sm:w-[250px] xl:w-[275px] 2xl:w-[315px]"
               alt="Mobile Bookshelf"
             />

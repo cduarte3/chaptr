@@ -3,8 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import Footer from "./Footer";
 import { TiThMenu } from "react-icons/ti";
 import { PiBooksFill } from "react-icons/pi";
-import { IoMdArrowRoundBack } from "react-icons/io";
-import { FaWindowClose, FaSort, FaUserCircle, FaSearch } from "react-icons/fa";
+import {
+  FaWindowClose,
+  FaSort,
+  FaUserCircle,
+  FaSearch,
+  FaArrowLeft,
+} from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { isOwnProfile, getCurrentUserId } from "../utils/auth";
 const Silk = lazy(() => import("./Silk"));
@@ -175,7 +180,7 @@ export default function Shelf({ userData }) {
             speed={6}
             scale={1}
             color="#565656"
-            noiseIntensity={1.5}
+            noiseIntensity={0}
             rotation={0}
           />
         </Suspense>
@@ -199,7 +204,7 @@ export default function Shelf({ userData }) {
               <ul className="flex justify-center items-center space-x-4 md:px-5 text-xl px-1">
                 <li>
                   <img
-                    src="/chaptr-logo-sm.png"
+                    src="/chaptr-logo-sm.webp"
                     className="w-[150px]"
                     alt="Chaptr Logo"
                   />
@@ -213,7 +218,7 @@ export default function Shelf({ userData }) {
                 {isCurrentUserProfile && (
                   <li>
                     <img
-                      src="/add.png"
+                      src="/add.webp"
                       alt="add book"
                       className="w-[60px] cursor-pointer"
                       onClick={addBook}
@@ -222,7 +227,7 @@ export default function Shelf({ userData }) {
                 )}
                 {!isCurrentUserProfile && (
                   <li onClick={goBack}>
-                    <IoMdArrowRoundBack
+                    <FaArrowLeft
                       size={60}
                       color="white"
                       className="cursor-pointer"
@@ -276,7 +281,7 @@ export default function Shelf({ userData }) {
               <ul className="pt-4 uppercase text-2xl text-white font-['Radley']">
                 <li>
                   <img
-                    src="/chaptr-logo-lg.png"
+                    src="/chaptr-logo-lg.webp"
                     alt="Logo in light beige"
                     className="w-[10rem] justify-center mx-auto py-5"
                   ></img>
@@ -393,7 +398,7 @@ export default function Shelf({ userData }) {
                   .filter(
                     (book) =>
                       book.title.toLowerCase().includes(searchTerm) ||
-                      book.author.toLowerCase().includes(searchTerm)
+                      book.author.toLowerCase().includes(searchTerm),
                   )
                   .map((book, index, arr) => (
                     <React.Fragment key={book.id}>
@@ -415,7 +420,7 @@ export default function Shelf({ userData }) {
                           />
                         )}
                         <img
-                          src="/book.png"
+                          src="/book.webp"
                           alt="Book placeholder"
                           className="w-full shadow-custom-dark rounded-2xl"
                         />
@@ -428,17 +433,19 @@ export default function Shelf({ userData }) {
                       {((index + 1) % 2 === 0 || index === arr.length - 1) &&
                         arr.length > 0 && (
                           <img
-                            src="/shelf-rack2.png"
+                            src="/shelf-rack.webp"
                             alt="Shelf"
                             className="col-span-2 lg:hidden w-full h-auto -mt-14 sm:-mt-16 md:-mt-20 z-0"
+                            fetchPriority="high"
                           />
                         )}
                       {((index + 1) % 4 === 0 || index === arr.length - 1) &&
                         arr.length > 0 && (
                           <img
-                            src="/shelf-rack2.png"
+                            src="/shelf-rack.webp"
                             alt="Shelf"
                             className="hidden lg:block col-span-4 w-full h-auto -mt-24 xl:-mt-26 2xl:-mt-28 z-0"
+                            fetchPriority="high"
                           />
                         )}
                     </React.Fragment>

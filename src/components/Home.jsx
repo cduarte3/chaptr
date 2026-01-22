@@ -1,97 +1,89 @@
 import React, { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import Footer from "./Footer";
+const Footer = lazy(() => import("./Footer"));
 import { FiLogOut } from "react-icons/fi";
 import { TiThMenu } from "react-icons/ti";
 import { FaUserCircle, FaWindowClose } from "react-icons/fa";
-import { TbBooks } from "react-icons/tb";
-import GradualBlur from "./GradualBlur";
+import { TbBooks, TbMessageCheck } from "react-icons/tb";
+import { RiBookMarkedLine } from "react-icons/ri";
+import { LuBookOpenText } from "react-icons/lu";
+const GradualBlur = lazy(() => import("./GradualBlur"));
 import SpotlightCard from "./SpotlightCard";
-import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 const Silk = lazy(() => import("./Silk"));
-import { TbMessageCheck } from "react-icons/tb";
-import { RiBookMarkedLine } from "react-icons/ri";
-import { LuBookOpenText } from "react-icons/lu";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
-  const lenis = new Lenis();
-
-  lenis.on("scroll", ScrollTrigger.update);
-
-  gsap.ticker.add((time) => {
-    lenis.raf(time * 1000);
-  });
-
-  gsap.ticker.lagSmoothing(0);
-
   useEffect(() => {
-    let ctx = gsap.context(() => {
-      gsap.fromTo(
-        ".custom-spotlight-card",
-        { y: 50, opacity: 0 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          scrollTrigger: {
-            trigger: ".custom-spotlight-card",
-            start: "top 70%",
-            toggleActions: "play none none reverse",
+    const timer = setTimeout(() => {
+      let ctx = gsap.context(() => {
+        gsap.fromTo(
+          ".custom-spotlight-card",
+          { y: 50, opacity: 0 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            scrollTrigger: {
+              trigger: ".custom-spotlight-card",
+              start: "top 90%",
+              toggleActions: "play none none",
+            },
           },
-        }
-      );
+        );
 
-      gsap.fromTo(
-        ".craft-section",
-        { y: 50, opacity: 0 },
-        {
-          opacity: 1,
-          duration: 0.6,
-          y: 0,
-          scrollTrigger: {
-            trigger: ".craft-section",
-            start: "top 55%",
-            toggleActions: "play none none reverse",
+        gsap.fromTo(
+          ".craft-section",
+          { y: 50, opacity: 0 },
+          {
+            opacity: 1,
+            duration: 0.6,
+            y: 0,
+            scrollTrigger: {
+              trigger: ".craft-section",
+              start: "top 55%",
+              toggleActions: "play none none",
+            },
           },
-        }
-      );
+        );
 
-      gsap.fromTo(
-        ".step-card",
-        { y: 50, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          stagger: window.innerWidth < 1024 ? 0.2 : 0,
-          scrollTrigger: {
-            trigger: ".steps-container",
-            start: "top 75%",
-            toggleActions: "play none none reverse",
+        gsap.fromTo(
+          ".step-card",
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            stagger: window.innerWidth < 1024 ? 0.2 : 0,
+            scrollTrigger: {
+              trigger: ".steps-container",
+              start: "top 75%",
+              toggleActions: "play none none",
+            },
           },
-        }
-      );
+        );
 
-      gsap.fromTo(
-        ".get-started-section",
-        { y: 50, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          scrollTrigger: {
-            trigger: ".get-started-section",
-            start: "top 75%",
-            toggleActions: "play none none reverse",
+        gsap.fromTo(
+          ".get-started-section",
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            scrollTrigger: {
+              trigger: ".get-started-section",
+              start: "top 75%",
+              toggleActions: "play none none",
+            },
           },
-        }
-      );
-    });
-    return () => ctx.revert();
+        );
+      });
+      return () => ctx.revert();
+    }, 1500);
+
+    return () => clearTimeout(timer);
   }, []);
 
   const navigate = useNavigate();
@@ -160,7 +152,7 @@ export default function Home() {
           <ul className="flex justify-center items-center space-x-4 md:px-5 text-xl px-1">
             <li>
               <img
-                src="chaptr-logo-sm.png"
+                src="chaptr-logo-sm.webp"
                 className="w-[150px]"
                 alt="Chaptr Logo"
               />
@@ -221,7 +213,7 @@ export default function Home() {
           <ul className="pt-4 uppercase text-2xl text-white font-['Radley']">
             <li>
               <img
-                src="/chaptr-logo-lg.png"
+                src="/chaptr-logo-lg.webp"
                 alt="Logo in light beige"
                 className="w-[10rem] justify-center mx-auto py-5"
               ></img>
@@ -275,7 +267,7 @@ export default function Home() {
             speed={6}
             scale={1}
             color="#565656"
-            noiseIntensity={1.5}
+            noiseIntensity={0}
             rotation={0}
           />
         </Suspense>
@@ -285,22 +277,24 @@ export default function Home() {
         <div className="w-full mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 pt-20 mx-auto justify-center items-center content-center pb-20 lg:pb-0">
             <img
-              src="chaptr-logo-lg.png"
+              src="chaptr-logo-lg.webp"
               alt="Chaptr logo"
               className="w-auto h-[55%] mx-auto"
             />
             <div className="md:block hidden">
               <img
-                src="desk_dash.png"
+                src="desk_dash.webp"
                 className="w-auto mx-auto px-10 lg:pr-10"
                 alt="Laptop with app screenshot"
+                fetchPriority="high"
               />
             </div>
             <div className="md:hidden">
               <img
-                src="mobile_dash.png"
+                src="mobile_dash.webp"
                 className="w-auto mx-auto px-10 sm:px-32"
                 alt="Smartphone with app screenshot"
+                fetchPriority="high"
               />
             </div>
           </div>
@@ -334,7 +328,7 @@ export default function Home() {
               reviews simple and intuitive.
             </h2>
             <Link to="/login">
-              <button className="font-['Radley'] flex w-[180px] lg:w-[300px] justify-center mx-auto rounded-[15px] py-3 px-5 text-2xl lg:text-3xl font-semibold bg-white border-transparent border-2 hover:border-white hover:bg-[rgb(105,105,105)] hover:text-white text-[#404040]">
+              <button className="font-['Radley'] flex w-[180px] lg:w-[300px] justify-center mx-auto rounded-[15px] py-3 px-5 text-2xl lg:text-3xl font-semibold bg-white border-transparent border-2 hover:border-white hover:bg-[rgb(187,187,187)] text-[#404040]">
                 Get Started
               </button>
             </Link>
@@ -428,7 +422,7 @@ export default function Home() {
               <span className="hidden lg:block">Get Started Now</span>
             </h1>
             <Link to="/login" className="mt-10">
-              <button className="w-[300px] md:w-[400px] 2xl:w-[450px] bg-white border-transparent border-2 hover:border-white hover:bg-[rgb(105,105,105)] hover:text-white text-[#404040] font-semibold sm:py-4 md:px-9 py-3 px-5 rounded-[15px] md:text-3xl text-2xl">
+              <button className="w-[300px] md:w-[400px] 2xl:w-[450px] bg-white border-transparent border-2 hover:border-white hover:bg-[rgb(187,187,187)] text-[#404040] font-semibold sm:py-4 md:px-9 py-3 px-5 rounded-[15px] md:text-3xl text-2xl">
                 Sign In
               </button>
             </Link>

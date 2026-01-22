@@ -127,7 +127,7 @@ export default function AddBook({ userId }) {
     if (!title || !author) {
       setErrorHeader("Missing Fields!");
       setErrorMessage(
-        "Please enter both title and author to search for a cover"
+        "Please enter both title and author to search for a cover",
       );
       handleOpen();
       return;
@@ -137,13 +137,13 @@ export default function AddBook({ userId }) {
       const encodedTitle = formatUrlParameter(title);
       const encodedAuthor = formatUrlParameter(author);
       const response = await fetch(
-        `https://bookcover.longitood.com/bookcover?book_title=${encodedTitle}&author_name=${encodedAuthor}`
+        `https://bookcover.longitood.com/bookcover?book_title=${encodedTitle}&author_name=${encodedAuthor}`,
       );
 
       if (!response.ok) {
         setErrorHeader("No Cover Found!");
         setErrorMessage(
-          "No cover image was found for this title and author. Try adjusting the spelling or use a different book."
+          "No cover image was found for this title and author. Try adjusting the spelling or use a different book.",
         );
         handleOpen();
         return;
@@ -157,14 +157,14 @@ export default function AddBook({ userId }) {
       } else {
         setErrorHeader("No Cover Found!");
         setErrorMessage(
-          "The cover service returned an unexpected response. Please try again later."
+          "The cover service returned an unexpected response. Please try again later.",
         );
       }
     } catch (error) {
       console.error("Error fetching cover:", error);
       setErrorHeader("Network Error!");
       setErrorMessage(
-        "Unable to connect to the cover search service. Please check your internet connection and try again."
+        "Unable to connect to the cover search service. Please check your internet connection and try again.",
       );
       handleOpen();
     }
@@ -239,7 +239,7 @@ export default function AddBook({ userId }) {
       console.error("Error adding review:", error);
       setErrorHeader("Error!");
       setErrorMessage(
-        "Unable to submit the book review. Please try again later."
+        "Unable to submit the book review. Please try again later.",
       );
       handleOpen();
     }
@@ -267,7 +267,7 @@ export default function AddBook({ userId }) {
           className="z-50 h-12 md:h-16 fixed mx-auto left-2 md:left-10 mt-6 cursor-pointer"
         />
         <img
-          src="/chaptr-logo-sm.png"
+          src="/chaptr-logo-sm.webp"
           alt="Chaptr Logo"
           className="z-50 h-12 md:h-16 fixed mx-auto left-0 right-0 mt-6"
         />
@@ -282,7 +282,7 @@ export default function AddBook({ userId }) {
             speed={6}
             scale={1}
             color="#565656"
-            noiseIntensity={1.5}
+            noiseIntensity={0}
             rotation={0}
           />
         </Suspense>

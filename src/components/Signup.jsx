@@ -139,7 +139,7 @@ export default function Signup() {
           <ul className="flex justify-center items-center space-x-4 md:px-5 text-xl px-1">
             <li>
               <img
-                src="chaptr-logo-sm.png"
+                src="chaptr-logo-sm.webp"
                 className="w-[150px]"
                 alt="Chaptr Logo"
               />
@@ -173,7 +173,7 @@ export default function Signup() {
           <ul className="pt-4 uppercase text-2xl text-white font-['Radley']">
             <li>
               <img
-                src="/chaptr-logo-lg.png"
+                src="/chaptr-logo-lg.webp"
                 alt="Logo in light beige"
                 className="w-[10rem] justify-center mx-auto py-5"
               ></img>
@@ -199,7 +199,7 @@ export default function Signup() {
               speed={6}
               scale={1}
               color="#565656"
-              noiseIntensity={1.5}
+              noiseIntensity={0}
               rotation={0}
             />
           </Suspense>
@@ -208,7 +208,7 @@ export default function Signup() {
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
             <img
               className="mx-auto w-[40%] lg:w-[60%]"
-              src="chaptr-logo-lg.png"
+              src="chaptr-logo-lg.webp"
               alt="Chaptr Logo"
             />
             <h2 className="mt-10 text-center text-5xl font-bold leading-9 tracking-tight text-white font-['Radley']">
