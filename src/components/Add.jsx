@@ -234,6 +234,7 @@ export default function AddBook({ userId }) {
       }
 
       // const data = await response.json();
+      localStorage.removeItem(`shelf_${userId}`);
       navigate(`/user/${activeUserId}`);
     } catch (error) {
       console.error("Error adding review:", error);
