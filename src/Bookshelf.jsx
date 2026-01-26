@@ -11,6 +11,15 @@ export default function Bookshelf() {
   // This function fetches the user bookshelf information
   useEffect(() => {
     const fetchUserData = async () => {
+      // Check localstorage for cached books first
+      const cacheKey = `shelf_${userId}`;
+      const cachedData = localStorage.getItem(cacheKey);
+
+      if (cachedData) {
+        setUserData(JSON.parse(cachedData));
+        return;
+      }
+
       try {
         if (!token) {
           console.error("Token is not available");
@@ -31,7 +40,7 @@ export default function Bookshelf() {
 
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/users/${userId}`,
-          requestOptions
+          requestOptions,
         );
 
         if (!response.ok) {
@@ -39,6 +48,8 @@ export default function Bookshelf() {
         }
 
         const data = await response.json();
+
+        localStorage.setItem(cacheKey, JSON.stringify(data));
         setUserData(data);
       } catch (error) {
         console.error("Error fetching user data:", error);

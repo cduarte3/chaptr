@@ -228,6 +228,7 @@ export default function BookEdit({ bookData, userId, bookId }) {
 
       // const data = await response.json();
       // alert("Book updated successfully!");
+      localStorage.removeItem(`shelf_${userId}`);
       navigate(`/user/${userId}/book/${bookId}`);
     } catch (error) {
       console.error("Error updating review:", error);

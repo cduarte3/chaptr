@@ -98,6 +98,7 @@ export default function Home() {
 
   const logOut = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem(`shelf_${userId}`);
     localStorage.removeItem("userId");
     navigate("/");
   };
@@ -112,11 +113,15 @@ export default function Home() {
 
   const goShelf = () => {
     const token = localStorage.getItem("token");
-    if (token) {
-      navigate("/user/" + userId);
+    if (!token) {
+      navigate("/login");
       return;
+    }
+
+    if (window.history.length > 1) {
+      navigate(-1);
     } else {
-      navigate("/");
+      navigate(`/user/${userId}`);
     }
   };
 

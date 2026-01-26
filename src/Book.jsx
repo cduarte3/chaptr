@@ -9,11 +9,27 @@ export default function Profile() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const url = `${
-      import.meta.env.VITE_API_URL
-    }/users/${userId}/book/${bookId}`;
-
     const fetchBookData = async () => {
+      const cacheKey = `shelf_${userId}`;
+      const cachedData = localStorage.getItem(cacheKey);
+
+      if (cachedData) {
+        const bookData = JSON.parse(cachedData);
+        const bookArray = bookData.books || [];
+        const foundBook = bookArray.find(
+          (book) => String(book.id) === String(bookId),
+        );
+
+        if (foundBook) {
+          setBookData(foundBook);
+          return;
+        }
+      }
+
+      const url = `${
+        import.meta.env.VITE_API_URL
+      }/users/${userId}/book/${bookId}`;
+
       try {
         if (!token) {
           console.error("Token is undefined");
