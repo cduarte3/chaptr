@@ -56,9 +56,15 @@ export default function Shelf({ userData }) {
 
   const goBack = () => {
     const token = localStorage.getItem("token");
-    if (token) {
-      navigate(-1);
+    if (!token) {
+      navigate("/login");
       return;
+    }
+
+    if (window.history.length > 1) {
+      navigate(-1);
+    } else {
+      navigate(`/user/${currentUserId}`);
     }
   };
 
@@ -121,6 +127,7 @@ export default function Shelf({ userData }) {
 
   const logOut = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem(`shelf_${currentUserId}`);
     localStorage.removeItem("userId");
     navigate("/");
   };

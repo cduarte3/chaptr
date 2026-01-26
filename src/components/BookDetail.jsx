@@ -70,6 +70,7 @@ export default function BookDetail({ bookData, userId }) {
       );
 
       if (response.ok) {
+        localStorage.removeItem(`shelf_${userId}`);
         navigate("/user/" + userId);
       } else {
         console.error("Failed to delete the book");
@@ -88,16 +89,21 @@ export default function BookDetail({ bookData, userId }) {
 
   const goShelf = () => {
     const token = localStorage.getItem("token");
-    if (token) {
-      navigate("/");
-      return;
-    } else {
+    if (!token) {
       navigate("/login");
+      return;
+    }
+
+    if (window.history.length > 1) {
+      navigate(-1);
+    } else {
+      navigate(`/user/${userId}`);
     }
   };
 
   const logOut = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem(`shelf_${userId}`);
     localStorage.removeItem("userId");
     navigate("/");
   };

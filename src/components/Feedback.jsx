@@ -23,6 +23,8 @@ export default function Feedback() {
 
   const logOut = () => {
     localStorage.removeItem("token");
+    let userId = localStorage.getItem("userId");
+    localStorage.removeItem(`shelf_${userId}`);
     localStorage.removeItem("userId");
     navigate("/");
   };
